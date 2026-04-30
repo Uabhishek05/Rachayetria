@@ -31,6 +31,7 @@ export interface Chapter {
   title: string;
   content: string[];
   pdfUrl?: string;
+  pdfStartPage?: number;
   isPremiumLocked?: boolean;
 }
 

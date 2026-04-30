@@ -31,6 +31,10 @@ function toBook(id: string, data: Record<string, unknown>): Book {
             title: raw.title ?? `Chapter ${idx + 1}`,
             content: Array.isArray(raw.content) ? raw.content.map(String) : [],
             pdfUrl: typeof raw.pdfUrl === 'string' ? raw.pdfUrl : undefined,
+            pdfStartPage:
+              typeof raw.pdfStartPage === 'number' && Number.isFinite(raw.pdfStartPage)
+                ? Math.max(1, Math.floor(raw.pdfStartPage))
+                : undefined,
             isPremiumLocked: Boolean(raw.isPremiumLocked),
           };
         })

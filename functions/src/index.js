@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+  import * as functions from 'firebase-functions';
 import admin from 'firebase-admin';
 import express from 'express';
 import cors from 'cors';

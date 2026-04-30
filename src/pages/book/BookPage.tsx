@@ -12,7 +12,7 @@ export function BookPage() {
   const { books, loading } = useCatalogData();
 
   const book = useMemo(
-    () => books.find((item) => item.id === params.bookId) ?? books[0],
+    () => (books.length === 0 ? undefined : books.find((item) => item.id === params.bookId) ?? books[0]),
     [books, params.bookId],
   );
 
@@ -55,7 +55,11 @@ export function BookPage() {
                 <article key={chapter.id} className="rounded-2xl border border-slate-200 p-4">
                   <p className="text-sm font-semibold">{chapter.title}</p>
                   <p className="mt-1 text-xs text-slate-500">
-                    {chapter.pdfUrl ? 'PDF chapter' : 'Text chapter'}
+                    {chapter.pdfUrl
+                      ? chapter.pdfStartPage
+                        ? `PDF chapter • starts at page ${chapter.pdfStartPage}`
+                        : 'PDF chapter'
+                      : 'Text chapter'}
                   </p>
                   {locked ? (
                     <p className="mt-2 text-xs text-primary">Premium chapter. Upgrade to unlock.</p>
